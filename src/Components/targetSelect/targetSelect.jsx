@@ -1,11 +1,13 @@
 // import { useState } from "react"
 import Character from "../characterIcon/characterIcon"
+import PropTypes from "prop-types"
 
-export default function TargetSelect() {
+export default function TargetSelect({ callback }) {
     // const [coordinates, setCoordinates] = useState('')
 
-    function submitTarget(id) {
+    function submitTarget(id, name) {
         console.log(`submitting target ${id}`)
+        callback(name)
     }
 
     const targets = [
@@ -15,10 +17,10 @@ export default function TargetSelect() {
     ]
 
     return (
-        <div>
+        <dialog open>
             {targets.map((target) => {
                 return (
-                    <button key={target.id} onClick={() => submitTarget(target.id)}>
+                    <button key={target.id} onClick={() => submitTarget(target.id, target.name)}>
                         <Character
                             url={target.imageURL}
                             name={target.name}
@@ -27,7 +29,11 @@ export default function TargetSelect() {
 
                 )
             })}
-        </div>
+        </dialog>
     )
 
+}
+
+TargetSelect.propTypes = {
+    callback: PropTypes.func.isRequired
 }

@@ -2,8 +2,15 @@ import Button from "../button/button"
 import { useState } from "react"
 import PropTypes from "prop-types"
 
-export default function GameOver({ time }){
+export default function GameOver({ time, callback }){
 	const [name, setName] = useState('')
+
+	function secondsToTime(time) {
+        const hour = Math.floor(time / 3600).toString().padStart(2, '0')
+        const min = Math.floor(time % 3600 / 60).toString().padStart(2, '0')
+        const sec = Math.floor(time % 60).toString().padStart(2, '0')
+        return hour + ':' + min + ':' + sec;
+    }
 	
 	async function submitPlayInfo(){
 		//API call to post player info to database
@@ -24,6 +31,7 @@ export default function GameOver({ time }){
 			}
 			const json = await response.json()
 			console.log(json)
+			callback()
 		} catch (e) {
 			console.log(e)
 		}
@@ -38,7 +46,7 @@ export default function GameOver({ time }){
 	return(
 		<dialog open>
 			<p> Game Over ! </p>
-			<p> Your time was {time} </p>
+			<p> Your time was {secondsToTime(time)} </p>
 			<p> Enter name for the leaderboards ! </p>
 			<input type='text' value={name} onChange={handleChange} />
 			<Button text='Submit' callback={submitPlayInfo} />
@@ -47,5 +55,6 @@ export default function GameOver({ time }){
 }
 
 GameOver.propTypes = { 
-    time: PropTypes.string.isRequired
+    time: PropTypes.number.isRequired,
+	callback: PropTypes.func.isRequired
 }

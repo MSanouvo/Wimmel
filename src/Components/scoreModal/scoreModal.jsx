@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import Button from "../button/button";
 
-export default function ScoreBoard() {
+export default function ScoreBoard({ callback }) {
     const [leaderboard, setLeaderboard] = useState([])
 
 
@@ -39,6 +40,7 @@ export default function ScoreBoard() {
                     </div>
                 )
             })}
+            <Button text="Play Again" callback={callback} />
         </dialog>
     )
 }

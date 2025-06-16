@@ -1,12 +1,8 @@
-// import { useState, useEffect } from "react";
 import Character from "../characterIcon/characterIcon";
+import Styles from "./targetList.module.css"
+// import PropTypes from "prop-types";
 
 export default function TargetList(){
-	// const [targets, setTargets] = useState([])
-	
-	// useEffect({
-	// 	//prob need an API call here to get target info
-	// })
 
     const targets = [
         {id: 1, imageURL: 'url', name: 'Dummy1'},
@@ -15,7 +11,7 @@ export default function TargetList(){
     ]
 	
 	return(
-		<div>
+		<div className={Styles.list}>
 			<p> Targets: </p>
 			{targets.map((target) => {
 				return(
@@ -29,3 +25,8 @@ export default function TargetList(){
 		</div>
 	)
 }
+
+// TargetList.propTypes ={
+// 	targets: PropTypes.array.isRequired
+// }
+

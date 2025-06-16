@@ -14,3 +14,7 @@ export default function StartModal({ callback }) {
 		</div>
 	)
 }
+
+StartModal.propTypes = {
+	callback: PropTypes.func.isRequired
+}
