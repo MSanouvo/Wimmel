@@ -1,13 +1,16 @@
 import Button from "../button/button"
 import PropTypes from "prop-types"
-// import { useState } from "react";
+import Styles from "./startModal.module.css"
 
 export default function StartModal({ callback }) {
-	// const [modalView, setModalView] = useState(true)
+
 
 	return (
 		<div>
-			<dialog open>
+			<dialog 
+			open
+			className={Styles.container}
+			>
 				<p> **Game Prompt goes here** </p>
 				<Button text='Play' callback={callback} />
 			</dialog>

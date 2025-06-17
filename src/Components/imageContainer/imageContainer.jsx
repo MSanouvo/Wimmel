@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import Styles from "./imageContainer.module.css"
 
 export default function ImageContainer({ url, callback }){
 
@@ -10,8 +11,8 @@ export default function ImageContainer({ url, callback }){
     }
 
     return(
-        <div>
-            <img onClick={getImageCoordinate} src={url} alt="game board" />
+        <div className={Styles.container}>
+            <img className={Styles.image} onClick={getImageCoordinate} src={url} alt="game board" />
         </div>
     )
 }

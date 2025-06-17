@@ -1,8 +1,9 @@
 // import { useState } from "react"
 import Character from "../characterIcon/characterIcon"
 import PropTypes from "prop-types"
+import Styles from "./targetSelect.module.css"
 
-export default function TargetSelect({ callback }) {
+export default function TargetSelect({ x, y, callback }) {
     // const [coordinates, setCoordinates] = useState('')
 
     function submitTarget(id, name) {
@@ -17,7 +18,14 @@ export default function TargetSelect({ callback }) {
     ]
 
     return (
-        <dialog open>
+        <dialog 
+        open 
+        className={Styles.container}
+        style={{
+            position: 'absolute',
+            top: `${y+100}px`,
+            left: `${x+150}px`
+        }}>
             {targets.map((target) => {
                 return (
                     <button key={target.id} onClick={() => submitTarget(target.id, target.name)}>
@@ -35,5 +43,7 @@ export default function TargetSelect({ callback }) {
 }
 
 TargetSelect.propTypes = {
-    callback: PropTypes.func.isRequired
+    callback: PropTypes.func.isRequired,
+    x:PropTypes.number.isRequired,
+    y:PropTypes.number.isRequired
 }

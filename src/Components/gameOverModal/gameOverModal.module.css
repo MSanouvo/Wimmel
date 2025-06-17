@@ -1,0 +1,31 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    gap: .5rem;
+}
+
+.header{
+    padding: 0;
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.container>p{
+    padding: 0;
+    margin: 0;
+}
+
+.container>input{
+    width: 60%;
+    padding: .5rem;
+}
+
+.modal{
+    position: absolute;
+    top: 40%;
+    border-radius: 10px;
+    width: 500px;
+}

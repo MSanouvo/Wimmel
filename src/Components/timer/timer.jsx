@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import Styles from "./timer.module.css"
 
-export default function Timer({ start }) {
-    const [time, setTime] = useState(0)
+export default function Timer({ start, total }) {
+    const [time, setTime] = useState(total)
 
     function secondsToTime(time) {
         const hour = Math.floor(time / 3600).toString().padStart(2, '0')
@@ -27,9 +28,14 @@ export default function Timer({ start }) {
     }, [start])
 
     return (
-        <div>
+        <div className={Styles.container}>
             <p>Time:</p>
-            <p>{secondsToTime(time)}</p>
+            {total != 0 ? (
+                <p>{secondsToTime(total)}</p>
+            ):(
+                <p>{secondsToTime(time)}</p>
+            )}
+            
             {/* <button onClick={()=> setStart(true)}>Start Timer</button> */}
         </div>
     )
@@ -37,4 +43,5 @@ export default function Timer({ start }) {
 
 Timer.propTypes = {
     start: PropTypes.bool.isRequired,
+    total: PropTypes.number.isRequired
 }

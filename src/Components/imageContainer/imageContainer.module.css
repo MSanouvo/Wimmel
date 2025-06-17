@@ -1,0 +1,13 @@
+.container{
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.image{
+    place-items: center;
+    width: 1200px;
+    height: 850px;
+    cursor: url("../../Assets/target-scope.png");
+}
+

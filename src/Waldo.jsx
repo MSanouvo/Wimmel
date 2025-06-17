@@ -101,21 +101,31 @@ export default function Waldo() {
     return (
         <div>
             <nav>
-                <h1>Waldo</h1>
-                {gameState != 'waiting' && (
-                    <TargetList />
-                )}
+                <div>
+                    <h1>Waldo</h1>
+                    {gameState != 'waiting' && (
+                        <TargetList />
+                    )}
+                </div>
             </nav>
-            <p>{xCoord}</p>
-            <p>{yCoord}</p>
-            <Timer start={timer} />
+        
+            {gameState === 'game over' || gameState === 'replay' ? (
+                <Timer start={timer} total={totalTime} />
+            ):(
+                <Timer start={timer} total={0} />
+            )}
+            
+
             {targetSelect != false && (
-                <TargetSelect callback={sendHit} />
+                <TargetSelect 
+                x={xCoord}
+                y={yCoord}
+                callback={sendHit} />
             )}
             {gameState != 'waiting' && (
                 <ImageContainer url={imageUrl} callback={getCoordinates} />
             )}
-            
+
             {renderModal(gameState)}
         </div>
     )
