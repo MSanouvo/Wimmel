@@ -1,0 +1,30 @@
+.miss{
+    border: 1px solid black;
+    width: 300px;
+    background-color: rgba(248, 108, 108, 0.636);
+    font-weight: bold;
+    border-radius: 10px;
+    position: absolute;
+    top: 30%;
+    padding: .5rem 2rem;
+    animation: 3s infinite alternate slide;
+}
+
+.hit{
+    border: 1px solid black;
+    width: 300px;
+    background-color: rgba(110, 248, 108, 0.636);
+    font-weight: bold;
+    border-radius: 10px;
+    position: absolute;
+    top: 30%;
+    padding: .5rem 2rem;
+    animation: 3s infinite alternate slide;
+}
+
+@keyframes slide {
+    0% {left: 100%;}
+    30% {left: 85%;}
+    70% {left: 85%;}
+    100% {left: 100%}
+}

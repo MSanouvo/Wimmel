@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import TargetList from "./Components/targetList/targetList";
 import Timer from "./Components/timer/timer";
 import ImageContainer from "./Components/imageContainer/imageContainer";
@@ -6,6 +6,7 @@ import StartModal from "./Components/startModal/startModal";
 import GameOver from "./Components/gameOverModal/gameOverModal";
 import ScoreBoard from "./Components/scoreModal/scoreModal";
 import TargetSelect from "./Components/targetSelect/targetSelect";
+import Message from "./Components/gameMessage/gameMessage";
 
 export default function Waldo() {
     const [gameState, setGameState] = useState('waiting')
@@ -16,6 +17,9 @@ export default function Waldo() {
     const [yCoord, setYCoord] = useState('')
     const [targetSelect, openTargetSelect] = useState(false)
     const [totalTime, setTotalTime] = useState('')
+
+    const [hitStatus, setHitStatus] = useState('')
+    const timeout = useRef(null)
 
 
     async function startGame() {
@@ -92,10 +96,20 @@ export default function Waldo() {
                 setGameState('game over')
             }
             console.log(json)
+            messageTimer(json.hit)
         } catch (e) {
             console.log(e)
         }
         openTargetSelect(false)
+    }
+
+    function messageTimer(status){
+        if(status === false) setHitStatus('miss')
+        else setHitStatus('hit')
+        clearTimeout(timeout.current)
+        timeout.current = setTimeout(() =>{
+            setHitStatus('')
+        }, 3000)
     }
 
     return (
@@ -115,6 +129,7 @@ export default function Waldo() {
                 <Timer start={timer} total={0} />
             )}
             
+            <Message status={hitStatus} />
 
             {targetSelect != false && (
                 <TargetSelect 
