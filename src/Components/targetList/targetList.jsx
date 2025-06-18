@@ -1,14 +1,9 @@
 import Character from "../characterIcon/characterIcon";
 import Styles from "./targetList.module.css"
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
-export default function TargetList(){
 
-    const targets = [
-        {id: 1, imageURL: 'url', name: 'Dummy1'},
-        {id: 2, imageURL: 'url', name: 'Dummy2'},
-        {id: 3, imageURL: 'url', name: 'Dummy3'}
-    ]
+export default function TargetList({ targets }){
 	
 	return(
 		<div className={Styles.list}>
@@ -17,8 +12,8 @@ export default function TargetList(){
 				return(
 					<Character 
 						key={target.id} 
-						url={target.imageURL} 
-						name={target.name}
+						url={target.Icons[0].url} 
+						// name={target.name}
 					/>
 				)
 			})}
@@ -26,7 +21,7 @@ export default function TargetList(){
 	)
 }
 
-// TargetList.propTypes ={
-// 	targets: PropTypes.array.isRequired
-// }
+TargetList.propTypes ={
+	targets: PropTypes.array.isRequired
+}
 

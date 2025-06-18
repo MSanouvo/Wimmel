@@ -7,6 +7,7 @@ import GameOver from "./Components/gameOverModal/gameOverModal";
 import ScoreBoard from "./Components/scoreModal/scoreModal";
 import TargetSelect from "./Components/targetSelect/targetSelect";
 import Message from "./Components/gameMessage/gameMessage";
+const hostURL = import.meta.env.VITE_API_URL
 
 export default function Waldo() {
     const [gameState, setGameState] = useState('waiting')
@@ -118,7 +119,7 @@ export default function Waldo() {
                 <div>
                     <h1>Waldo</h1>
                     {gameState != 'waiting' && (
-                        <TargetList />
+                        <TargetList targets={targets} />
                     )}
                 </div>
             </nav>
@@ -135,10 +136,12 @@ export default function Waldo() {
                 <TargetSelect 
                 x={xCoord}
                 y={yCoord}
-                callback={sendHit} />
+                callback={sendHit}
+                targets={targets}
+                />
             )}
             {gameState != 'waiting' && (
-                <ImageContainer url={imageUrl} callback={getCoordinates} />
+                <ImageContainer url={hostURL+imageUrl} callback={getCoordinates} />
             )}
 
             {renderModal(gameState)}

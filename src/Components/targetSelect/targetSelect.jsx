@@ -3,19 +3,12 @@ import Character from "../characterIcon/characterIcon"
 import PropTypes from "prop-types"
 import Styles from "./targetSelect.module.css"
 
-export default function TargetSelect({ x, y, callback }) {
-    // const [coordinates, setCoordinates] = useState('')
+export default function TargetSelect({ x, y, callback , targets }) {
 
-    function submitTarget(id, name) {
-        console.log(`submitting target ${id}`)
+    function submitTarget(name) {
+        console.log(`submitting target ${name}`)
         callback(name)
     }
-
-    const targets = [
-        { id: 1, imageURL: 'url', name: 'Dummy1' },
-        { id: 2, imageURL: 'url', name: 'Dummy2' },
-        { id: 3, imageURL: 'url', name: 'Dummy3' }
-    ]
 
     return (
         <dialog 
@@ -27,10 +20,11 @@ export default function TargetSelect({ x, y, callback }) {
             left: `${x+150}px`
         }}>
             {targets.map((target) => {
+                console.log(target)
                 return (
-                    <button key={target.id} onClick={() => submitTarget(target.id, target.name)}>
+                    <button key={target.id} onClick={() => submitTarget(target.name)}>
                         <Character
-                            url={target.imageURL}
+                            url={target.Icons[0].url}
                             name={target.name}
                         />
                     </button>
@@ -44,6 +38,7 @@ export default function TargetSelect({ x, y, callback }) {
 
 TargetSelect.propTypes = {
     callback: PropTypes.func.isRequired,
-    x:PropTypes.number.isRequired,
-    y:PropTypes.number.isRequired
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+    targets:PropTypes.array.isRequired
 }

@@ -1,9 +1,12 @@
 import PropTypes from "prop-types"
+import Styles from "./characterIcon.module.css"
+
+const hostURL = import.meta.env.VITE_API_URL
 
 export default function Character({ url, name  }) {
     return(
 		<div>
-			<img src={url}></img>
+			<img className={Styles.image} src={hostURL+url}></img>
 			{name && (
 				<p>{name}</p>
 			)}
@@ -13,6 +16,6 @@ export default function Character({ url, name  }) {
 
 Character.propTypes = {
     url: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+    name: PropTypes.string
 }
 
