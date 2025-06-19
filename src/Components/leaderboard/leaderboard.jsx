@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Styles from "./leaderboard.module.css"
 import PropTypes from "prop-types";
+const hostURL = import.meta.env.VITE_API_URL
 
 export default function Leaderboard({ current }) {
     const [leaderboard, setLeaderboard] = useState([])
@@ -15,7 +16,7 @@ export default function Leaderboard({ current }) {
     useEffect(() => {
         async function fetchLeaderboard() {
             try {
-                const response = await fetch(`http://localhost:3000/game/leaderboard`, {
+                const response = await fetch(`${hostURL}/game/leaderboard`, {
                     method: "GET",
                     mode: "cors",
                     headers: {

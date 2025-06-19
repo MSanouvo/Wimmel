@@ -18,7 +18,7 @@ export default function Waldo() {
     const [yCoord, setYCoord] = useState('')
     const [targetSelect, openTargetSelect] = useState(false)
     const [totalTime, setTotalTime] = useState('')
-
+    //Message Component
     const [hitStatus, setHitStatus] = useState('')
     const timeout = useRef(null)
 
@@ -26,7 +26,7 @@ export default function Waldo() {
     async function startGame() {
         //Change the react state to open/close modal
         try {
-            const response = await fetch(`http://localhost:3000/game/start`, {
+            const response = await fetch(`${hostURL}/game/start`, {
                 method: "GET",
                 mode: "cors",
                 headers: {
@@ -78,7 +78,7 @@ export default function Waldo() {
                 target: name
             }
             console.log(target)
-            const response = await fetch(`http://localhost:3000/game/target`, {
+            const response = await fetch(`${hostURL}/game/target`, {
                 method: "POST",
                 mode: "cors",
                 headers: {
@@ -104,44 +104,45 @@ export default function Waldo() {
         openTargetSelect(false)
     }
 
-    function messageTimer(status){
-        if(status === false) setHitStatus('miss')
+    function messageTimer(status) {
+        if (status === false) setHitStatus('miss')
         else setHitStatus('hit')
         clearTimeout(timeout.current)
-        timeout.current = setTimeout(() =>{
+        timeout.current = setTimeout(() => {
             setHitStatus('')
         }, 3000)
     }
 
     return (
-        <div>
+        <div id="container">
             <nav>
+                <h1>Waldo</h1>
                 <div>
-                    <h1>Waldo</h1>
                     {gameState != 'waiting' && (
                         <TargetList targets={targets} />
                     )}
                 </div>
+
             </nav>
-        
+
             {gameState === 'game over' || gameState === 'replay' ? (
                 <Timer start={timer} total={totalTime} />
-            ):(
+            ) : (
                 <Timer start={timer} total={0} />
             )}
-            
+
             <Message status={hitStatus} />
 
             {targetSelect != false && (
-                <TargetSelect 
-                x={xCoord}
-                y={yCoord}
-                callback={sendHit}
-                targets={targets}
+                <TargetSelect
+                    x={xCoord}
+                    y={yCoord}
+                    callback={sendHit}
+                    targets={targets}
                 />
             )}
             {gameState != 'waiting' && (
-                <ImageContainer url={hostURL+imageUrl} callback={getCoordinates} />
+                <ImageContainer url={hostURL + imageUrl} callback={getCoordinates} />
             )}
 
             {renderModal(gameState)}

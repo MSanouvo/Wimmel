@@ -3,6 +3,7 @@ import Button from "../button/button";
 import PropTypes from "prop-types";
 import Styles from "./scoreModal.module.css"
 import Leaderboard from "../leaderboard/leaderboard";
+const hostURL = import.meta.env.VITE_API_URL
 
 export default function ScoreBoard({ callback }) {
     const [score, setScore] = useState([])
@@ -20,7 +21,7 @@ export default function ScoreBoard({ callback }) {
         //API call to get scores from DB
         async function fetchScores() {
             try {
-                const response = await fetch(`http://localhost:3000/game/score`, {
+                const response = await fetch(`${hostURL}/game/score`, {
                     method: "GET",
                     mode: "cors",
                     headers: {

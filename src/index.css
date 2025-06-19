@@ -71,26 +71,33 @@ button:focus-visible {
   }
 }
 
-nav{
+nav {
   background-color: #646cff;
   width: 100vw;
   height: 100px;
-  align-self: center;
-}
-
-nav>div{
-  padding: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-p{
+nav > h1 {
+  padding: 0 100px;
+}
+
+p {
   padding: 0;
   margin: 0;
 }
 
-h2{
+h2 {
   padding: 0;
   margin: 0;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+  justify-content: center;
 }

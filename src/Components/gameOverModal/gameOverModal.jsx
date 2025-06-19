@@ -2,6 +2,7 @@ import Button from "../button/button"
 import { useState } from "react"
 import PropTypes from "prop-types"
 import Styles from "./gameOverModal.module.css"
+const hostURL = import.meta.env.VITE_API_URL
 
 export default function GameOver({ time, callback }) {
 	const [name, setName] = useState('')
@@ -19,7 +20,7 @@ export default function GameOver({ time, callback }) {
 			const player = {
 				name: name
 			}
-			const response = await fetch(`http://localhost:3000/game/game-over`, {
+			const response = await fetch(`${hostURL}/game/game-over`, {
 				method: "POST",
 				mode: "cors",
 				headers: {
