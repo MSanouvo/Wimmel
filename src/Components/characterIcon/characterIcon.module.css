@@ -1,4 +1,24 @@
 .image{
     width: 60px;
     border-radius: 50%;
+    display: flex;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.found{
+    background-color: #9C1515;
+    width: 60px;
+    border-radius: 50%;
+    display: flex;
+}
+
+.foundImage{
+    width: 60px;
+    border-radius: 50%;
+    opacity: 70%;
 }

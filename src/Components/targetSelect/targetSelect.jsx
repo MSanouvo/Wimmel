@@ -16,13 +16,13 @@ export default function TargetSelect({ x, y, callback , targets }) {
         className={Styles.container}
         style={{
             position: 'absolute',
-            top: `${y+100}px`,
+            top: `${y}px`,
             left: `${x+150}px`
         }}>
             {targets.map((target) => {
                 console.log(target)
                 return (
-                    <button key={target.id} onClick={() => submitTarget(target.name)}>
+                    <button className={Styles.button} key={target.id} onClick={() => submitTarget(target.name)}>
                         <Character
                             url={target.Icons[0].url}
                             name={target.name}

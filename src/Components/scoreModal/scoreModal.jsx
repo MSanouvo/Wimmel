@@ -32,7 +32,6 @@ export default function ScoreBoard({ callback }) {
                     throw new Error(`Error ${response.status}`)
                 }
                 const json = await response.json()
-                console.log(json)
                 setScore(json)
                 setCurrentScore(json.id)
             } catch (e) {
@@ -49,26 +48,26 @@ export default function ScoreBoard({ callback }) {
             className={Styles.modal}
         >
             <div className={Styles.tabButton}>
-                <button onClick={() => setTab('score')}>Score</button>
-                <button onClick={() => setTab('leaderboard')}>Leaderboard</button>
-                {/* <Button text="Score" callback={()=> setTab('score')} />
-                <Button text="Leaderboard" callback={()=> setTab('leaderboard')} /> */}
+                <button className={Styles.tab} onClick={() => setTab('score')}>Score</button>
+                <button className={Styles.tab} onClick={() => setTab('leaderboard')}>Leaderboard</button>
             </div>
 
-
-            {tab === 'score' && (
-                <div className={Styles.container}>
-                    <div className={Styles.score} key={score.id}>
-                        <h2 className={Styles.player}>{score.name}</h2>
-                        <p>{secondsToTime(score.time)}</p>
+            <div className={Styles.scores}>
+                {tab === 'score' && (
+                    <div className={Styles.container}>
+                        <div className={Styles.score} key={score.id}>
+                            <h2 className={Styles.player}>{score.name}</h2>
+                            <p>{secondsToTime(score.time)}</p>
+                        </div>
+                        <Button text="Play Again" callback={callback} />
                     </div>
-                    <Button text="Play Again" callback={callback} />
-                </div>
-            )}
+                )}
 
-            {tab === 'leaderboard' && (
-                <Leaderboard current={currentScore} />
-            )}
+                {tab === 'leaderboard' && (
+                    <Leaderboard current={currentScore} />
+                )}
+            </div>
+
 
 
         </dialog>

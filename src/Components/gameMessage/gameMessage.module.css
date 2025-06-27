@@ -1,8 +1,9 @@
 .miss{
-    border: 1px solid black;
+    border: 2px solid black;
     width: 300px;
-    background-color: rgba(248, 108, 108, 0.636);
+    background-color: #e06666;
     font-weight: bold;
+    font-size: 1.2rem;
     border-radius: 10px;
     position: absolute;
     top: 30%;
@@ -11,10 +12,11 @@
 }
 
 .hit{
-    border: 1px solid black;
+    border: 2px solid black;
     width: 300px;
-    background-color: rgba(110, 248, 108, 0.636);
+    background-color: #75e066;
     font-weight: bold;
+    font-size: 1.2rem;
     border-radius: 10px;
     position: absolute;
     top: 30%;

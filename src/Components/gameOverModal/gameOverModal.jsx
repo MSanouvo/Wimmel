@@ -15,10 +15,16 @@ export default function GameOver({ time, callback }) {
 	}
 
 	async function submitPlayInfo() {
-		//API call to post player info to database
 		try {
-			const player = {
-				name: name
+			let player = {}
+			if(name.trim() === ''){
+				player = {
+					name: "Player"
+				}
+			} else {
+				player = {
+					name: name
+				}
 			}
 			const response = await fetch(`${hostURL}/game/game-over`, {
 				method: "POST",
@@ -51,11 +57,17 @@ export default function GameOver({ time, callback }) {
 			className={Styles.modal}
 		>
 			<div className={Styles.container}>
-				<h3 className={Styles.header}> Game Over ! </h3>
-				<p> Your time was {secondsToTime(time)} </p>
-				<p> Enter name for the leaderboards ! </p>
-				<input type='text' value={name} onChange={handleChange} />
-				<Button text='Submit' callback={submitPlayInfo} />
+				<div className={Styles.content}>
+					<h3 className={Styles.header}> Game Over ! </h3>
+					<p> Your time was {secondsToTime(time)} </p>
+					<p> Enter your name for the leaderboards ! </p>
+				</div>
+
+				<div className={Styles.form}>
+					<input id="input" className={Styles.input} type='text' value={name} onChange={handleChange}/>
+					<Button text='Submit' callback={submitPlayInfo} />
+				</div>
+
 			</div>
 
 		</dialog>

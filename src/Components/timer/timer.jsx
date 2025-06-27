@@ -29,11 +29,11 @@ export default function Timer({ start, total }) {
 
     return (
         <div className={Styles.container}>
-            <p>Time:</p>
+            <p className={Styles.header}>Time:</p>
             {total != 0 ? (
-                <p>{secondsToTime(total)}</p>
+                <p className={Styles.time}>{secondsToTime(total)}</p>
             ):(
-                <p>{secondsToTime(time)}</p>
+                <p className={Styles.time}>{secondsToTime(time)}</p>
             )}
             
             {/* <button onClick={()=> setStart(true)}>Start Timer</button> */}

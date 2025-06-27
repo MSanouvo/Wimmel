@@ -7,6 +7,8 @@ import GameOver from "./Components/gameOverModal/gameOverModal";
 import ScoreBoard from "./Components/scoreModal/scoreModal";
 import TargetSelect from "./Components/targetSelect/targetSelect";
 import Message from "./Components/gameMessage/gameMessage";
+import Footer from "./Components/footer/footer";
+import Styles from "./Waldo.module.css"
 const hostURL = import.meta.env.VITE_API_URL
 
 export default function Waldo() {
@@ -18,6 +20,8 @@ export default function Waldo() {
     const [yCoord, setYCoord] = useState('')
     const [targetSelect, openTargetSelect] = useState(false)
     const [totalTime, setTotalTime] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [foundTargets, setFoundTargets] = useState([])
     //Message Component
     const [hitStatus, setHitStatus] = useState('')
     const timeout = useRef(null)
@@ -25,6 +29,9 @@ export default function Waldo() {
 
     async function startGame() {
         //Change the react state to open/close modal
+        setLoading(true)
+        setGameState('loading')
+        setFoundTargets([])
         try {
             const response = await fetch(`${hostURL}/game/start`, {
                 method: "GET",
@@ -44,8 +51,9 @@ export default function Waldo() {
             console.log(json)
         } catch (e) {
             console.log(e)
+        } finally {
+            setLoading(false)
         }
-        console.log('Game starting')
     }
 
     function renderModal(state) {
@@ -92,11 +100,15 @@ export default function Waldo() {
             const json = await response.json()
             if (json.time != undefined) {
                 console.log('game over')
+                setFoundTargets(foundTargets => [...foundTargets,name] )
                 setTotalTime(json.time)
                 startTimer(false)
                 setGameState('game over')
             }
             console.log(json)
+            if(json.hit === true){
+                setFoundTargets(foundTargets => [...foundTargets,name] )
+            }
             messageTimer(json.hit)
         } catch (e) {
             console.log(e)
@@ -114,38 +126,51 @@ export default function Waldo() {
     }
 
     return (
-        <div id="container">
-            <nav>
-                <h1>Waldo</h1>
+        <div className={Styles.container}>
+            <nav className={Styles.nav}>
+                <h1 className={Styles.navHeader}>Wimmel</h1>
                 <div>
-                    {gameState != 'waiting' && (
-                        <TargetList targets={targets} />
+                    {gameState != 'waiting' && gameState != 'loading' && (
+                        <TargetList targets={targets} found={foundTargets} />
                     )}
                 </div>
 
             </nav>
+            <main className={Styles.content}>
+                <Message status={hitStatus} />
 
-            {gameState === 'game over' || gameState === 'replay' ? (
-                <Timer start={timer} total={totalTime} />
-            ) : (
-                <Timer start={timer} total={0} />
-            )}
+                {targetSelect != false && (
+                    <TargetSelect
+                        x={xCoord}
+                        y={yCoord}
+                        callback={sendHit}
+                        targets={targets}
+                    />
+                )}
 
-            <Message status={hitStatus} />
+                {loading != false && (
+                    <div className={Styles.loaderContainer}>
+                        <div className={Styles.loader}></div>
+                    </div>
 
-            {targetSelect != false && (
-                <TargetSelect
-                    x={xCoord}
-                    y={yCoord}
-                    callback={sendHit}
-                    targets={targets}
-                />
-            )}
-            {gameState != 'waiting' && (
-                <ImageContainer url={hostURL + imageUrl} callback={getCoordinates} />
-            )}
+                )}
+                {gameState != 'waiting' && gameState != 'loading' && (
+                    <div>
+                        {gameState === 'game over' || gameState === 'replay' ? (
+                            <Timer start={timer} total={totalTime} />
+                        ) : (
+                            <Timer start={timer} total={0} />
+                        )}
+                        <ImageContainer url={hostURL + imageUrl} callback={getCoordinates} />
+                    </div>
 
-            {renderModal(gameState)}
+                )}
+
+                {renderModal(gameState)}
+            </main>
+
+
+            <Footer />
         </div>
     )
 }

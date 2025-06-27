@@ -2,5 +2,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 1em;
+    padding: 2em;
+}
+
+.header{
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.time{
+    font-size: 1.3rem;
 }

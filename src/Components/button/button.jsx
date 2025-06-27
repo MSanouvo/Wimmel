@@ -12,5 +12,5 @@ export default function Button({ text, callback }){
 
 Button.propTypes = {
     text: PropTypes.string.isRequired,
-    callback: PropTypes.func.isRequired
+    callback: PropTypes.func
 }
