@@ -1,4 +1,4 @@
-# Where's Waldo Frontend
+# Wimmel
 
 Our Frontend client for a Photo Tagging game akin to Where's Waldo (courtesy of The Odin Project)
 
@@ -13,3 +13,4 @@ Possible Improvement:
 - Add more maps with their own themes and personality
 - Add sounds and music for fun
 - Turn the game into a daily game (similar to Wordle or Crossword puzzles) by adding more maps/targets that change every day
+- Design responsive layout for smaller screens

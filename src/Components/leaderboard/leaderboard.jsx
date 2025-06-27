@@ -27,7 +27,6 @@ export default function Leaderboard({ current }) {
                     throw new Error(`Error ${response.status}`)
                 }
                 const json = await response.json()
-                console.log(json.leaderboard)
                 setLeaderboard(json.leaderboard)
             } catch (e) {
                 console.log(e)

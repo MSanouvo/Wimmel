@@ -48,7 +48,6 @@ export default function Waldo() {
             setTargets(json.targets)
             startTimer(true)
             setGameState('playing')
-            console.log(json)
         } catch (e) {
             console.log(e)
         } finally {
@@ -72,7 +71,6 @@ export default function Waldo() {
     }
 
     function getCoordinates(x, y) {
-        console.log(`Coordinates: ${x}, ${y}`)
         setXCoord(x)
         setYCoord(y)
         openTargetSelect(true)
@@ -85,7 +83,6 @@ export default function Waldo() {
                 y: yCoord,
                 target: name
             }
-            console.log(target)
             const response = await fetch(`${hostURL}/game/target`, {
                 method: "POST",
                 mode: "cors",
@@ -99,13 +96,11 @@ export default function Waldo() {
             }
             const json = await response.json()
             if (json.time != undefined) {
-                console.log('game over')
                 setFoundTargets(foundTargets => [...foundTargets,name] )
                 setTotalTime(json.time)
                 startTimer(false)
                 setGameState('game over')
             }
-            console.log(json)
             if(json.hit === true){
                 setFoundTargets(foundTargets => [...foundTargets,name] )
             }
@@ -155,14 +150,14 @@ export default function Waldo() {
 
                 )}
                 {gameState != 'waiting' && gameState != 'loading' && (
-                    <div>
+                    <section>
                         {gameState === 'game over' || gameState === 'replay' ? (
                             <Timer start={timer} total={totalTime} />
                         ) : (
                             <Timer start={timer} total={0} />
                         )}
                         <ImageContainer url={hostURL + imageUrl} callback={getCoordinates} />
-                    </div>
+                    </section>
 
                 )}
 

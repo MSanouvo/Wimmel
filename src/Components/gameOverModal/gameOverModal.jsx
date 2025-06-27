@@ -37,14 +37,11 @@ export default function GameOver({ time, callback }) {
 			if (!response.ok) {
 				throw new Error(`Error ${response.status}`)
 			}
-			const json = await response.json()
-			console.log(json)
+			// const json = await response.json()
 			callback()
 		} catch (e) {
 			console.log(e)
 		}
-		// console.log(`${name} submitted time of ${time}`)
-		console.log('player name submitted')
 	}
 
 	function handleChange(e) {

@@ -6,7 +6,6 @@ import Styles from "./targetSelect.module.css"
 export default function TargetSelect({ x, y, callback , targets }) {
 
     function submitTarget(name) {
-        console.log(`submitting target ${name}`)
         callback(name)
     }
 
@@ -20,7 +19,6 @@ export default function TargetSelect({ x, y, callback , targets }) {
             left: `${x+150}px`
         }}>
             {targets.map((target) => {
-                console.log(target)
                 return (
                     <button className={Styles.button} key={target.id} onClick={() => submitTarget(target.name)}>
                         <Character
