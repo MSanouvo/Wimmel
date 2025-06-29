@@ -1,7 +1,8 @@
 # Wimmel
 
 Try Wimmel <a href="https://wimmel.netlify.app/">HERE</a>
-**Please wait a minute for the server to start if the image doesn't load immediately**
+
+(**Please wait a minute for the server to start if the image doesn't load immediately**)
 
 The Frontend client for a Photo Tagging game akin to Where's Waldo (courtesy of The Odin Project)
 
